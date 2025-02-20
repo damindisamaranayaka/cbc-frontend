@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { BsGraphUp } from "react-icons/bs";
-import { FaBox } from "react-icons/fa"; // Added product icon
+import { FaBox } from "react-icons/fa";
+import { Routes, Route } from "react-router-dom";
+import AdminProductPage from "./admin/adminProductPage";
+
 
 export default function AdminHomePage() {
   return (
@@ -29,11 +32,17 @@ export default function AdminHomePage() {
       </div>
 
       {/* Main Content Area */}
-      <div className="w-[80%] h-screen bg-gray-100 p-6">
-        <h1 className="text-3xl font-semibold">Welcome to the Admin Dashboard</h1>
-        <p className="text-gray-600 mt-2">
-          Select an option from the sidebar to manage your application.
-        </p>
+      <div className="w-[80%] h-screen bg-red-600 p-6">
+        <Routes>
+          {/* Corrected paths (relative to /admin) */}
+          <Route path="dashboard" element={<h1 className="text-3xl font-semibold">Dashboard</h1>} />
+          <Route path="products" element={<AdminProductPage/>} />
+
+          {/* Default Home Page (when no sub-route is selected) */}
+          <Route path="*" element={
+           <h1>404 not found the admin page</h1>
+          } />
+        </Routes>
       </div>
     </div>
   );
