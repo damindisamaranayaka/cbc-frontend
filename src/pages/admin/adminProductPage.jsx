@@ -37,7 +37,7 @@ console.log(products)
 
     axios.get("http://localhost:4000/api/products").then((res)=>{
         console.log(res.data)
-        setProducts(res.data)
+        setProducts(res.data)  //use state eke thiyena setProducts eka call karala data ganna one
     })
     return(
         <div>
@@ -47,7 +47,6 @@ console.log(products)
                     return(
                         <div key={product._id}>
                             <h1>{product.productName}</h1>
-
                         </div>)
                 })
             }
