@@ -36,9 +36,21 @@ console.log(products)
 
 
     axios.get("http://localhost:4000/api/products").then((res)=>{
-        console.log(res)
+        console.log(res.data)
+        setProducts(res.data)
     })
     return(
-        <div>Admin Product Page</div>
+        <div>
+            <h1>Admin Product Page</h1>
+            {
+                products.map((product,index)=>{
+                    return(
+                        <div key={product._id}>
+                            <h1>{product.productName}</h1>
+
+                        </div>)
+                })
+            }
+            </div>
     )
 }
