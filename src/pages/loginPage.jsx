@@ -1,36 +1,47 @@
 import { Link } from 'react-router-dom';
-
+import {useState} from "react"
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 export default function LoginPage() {
+  const [email,setEmail]= useState("Your Email")
+  const [password, setPassword]= useState("")
+
+  function login(){
+    axios.post("http://localhost:4000/api/users/login", {
+      email:email,
+      password:password
+    }).then(
+      (res)=>{
+        console.log(res)
+        if(res.data.user==null){    //user knk log wela nathnm function eka methanin nawaththala return karann ona
+          toast.error(res.data.message)  //mee roast ek dammama msg ek udin lassanat pennawa
+          return
+        }
+        
+        localStorage.setItem("token", res.data.token)   //local storage eke userge token ek save krgnnwa
+        if(res.data.user.type== "admin"){
+          window.location.href="/admin"    //type ek admin nm admin dashboard ekt ynn
+      }  else{
+        window.location.href="/" 
+      }
+    }
+    )
+  }
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-96">
-        <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Login</h1>
-        
-        <div className="mb-4">
-          <label className="block text-gray-600 text-sm font-medium mb-1">Username</label>
-          <input 
-            type="text" 
-            placeholder="Enter your username" 
-            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none" 
-          />
-        </div>
-        
-        <div className="mb-4">
-          <label className="block text-gray-600 text-sm font-medium mb-1">Password</label>
-          <input 
-            type="password" 
-            placeholder="Enter your password" 
-            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none" 
-          />
-        </div>
-        
-        <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition">Login</button>
-        
-        <div className="flex justify-between items-center mt-4">
-          <button className="text-sm text-gray-600 hover:underline">Forgot Password?</button>
-          <Link to="/" className="text-sm text-blue-500 hover:underline">Go to Home</Link>
-        </div>
-      </div>
+   <div className= "flex justify-center items-center w-full h-screen bg-red-800">
+    <div className="flex flex-col justify-center items-center w-[450px] h-[450px] bg-blue-600" >
+    <img src='/logo.png' className="rounded-full w-[100px]"/>
+    <span>Email</span>
+    <input defaultValue={email} onChange={(e)=>{
+        setEmail(e.target.value)
+    }}/>
+    <span>Password</span>
+    <input type='password' defaultValue={password} onChange={(e)=>{
+      setPassword(e.target.value)
+    }}/>
+    <button onClick={login}
+    className="bg-white">Login</button>
     </div>
+   </div>
   );
 }
