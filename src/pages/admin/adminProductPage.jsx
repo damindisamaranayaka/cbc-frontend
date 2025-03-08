@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 export default function AdminProductPage(){
 
     const [products, setProducts]= useState([ {
@@ -32,13 +32,16 @@ export default function AdminProductPage(){
         "description": "A lightweight, fast-absorbing face serum enriched with hyaluronic acid and vitamin C for deep hydration and a radiant glow.",
         "__v": 0
     }])
-console.log(products)
 
 
+useEffect(()=>{
     axios.get("http://localhost:4000/api/products").then((res)=>{
         console.log(res.data)
-        setProducts(res.data)  //use state eke thiyena setProducts eka call karala data ganna one
+        setProducts(res.data)  //use state eke thiyena setProducts eka call karala data ganna
     })
+}, [])
+
+
     return(
         <div>
             <h1>Admin Product Page</h1>
