@@ -50,21 +50,46 @@ export default function AdminProductPage() {
     return (
         <div>
             <h1>Admin Product Page</h1>
-            {
-                products.map(
-                    (product,index)=>{
-                        return(
-                            <div key={product._id}>
-                                {index}
-                                {product.productName}
-                                </div>
-                        )
-                    }
-                )
-            }
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Last Price</th>
+                    <th>Stock</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1234</td>
+                    <td>Face Serum</td>
+                    <td>39.99</td>
+                    <td>100</td>
+                    <td>Hydrating serum</td>
+                    </tr>
+
+                    <tr>
+                    <td>1267</td>
+                    <td>Face cream</td>
+                    <td>56.99</td>
+                    <td>167</td>
+                    <td>Hydrating cream</td>
+                    </tr>
+
+                    <tr>
+                    <td>1784</td>
+                    <td>Face wash</td>
+                    <td>38.99</td>
+                    <td>180</td>
+                    <td>Deep Cleansing</td>
+                    </tr>
+            </tbody>
+        </table>
             </div>
         
 
         
     );
 }
+//key={product._id}   is React key, which is required to uniquely identify elements in a list and helps React efficiently update the UI.
