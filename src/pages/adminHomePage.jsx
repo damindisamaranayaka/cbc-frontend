@@ -32,7 +32,7 @@ export default function AdminHomePage() {
       </div>
 
       {/* Main Content Area */}
-      <div className="w-[80%] h-screen bg-red-600 p-6">
+      <div className="w-[80%] h-screen ">
         <Routes>
           {/* Corrected paths (relative to /admin) */}
           <Route path="dashboard" element={<h1 className="text-3xl font-semibold">Dashboard</h1>} />
