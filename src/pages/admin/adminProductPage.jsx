@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaTrash, FaPencilAlt } from "react-icons/fa";
 
 export default function AdminProductPage() {
     const [products, setProducts] = useState([
@@ -40,42 +41,42 @@ export default function AdminProductPage() {
             });
     }, []);
 
-    useEffect(() => {
-        console.log({
-            discountTitle: "Summer Sale",
-            firstProduct: products.length > 0 ? products[0] : "No products available"
-        });
-    }, [products]); // Logs updated products after fetching
-
     return (
-        <div>
-            <h1>Admin Product Page</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Product ID</th>
-                    <th>Product Name</th>
-                    <th>Last Price</th>
-                    <th>Stock</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                {products.map((product,index) => {
-                    return <tr key={index}>
-                        <td>{product.productId}</td>
-                        <td>{product.productName}</td>
-                        <td>{product.lastPrice}</td>
-                        <td>{product.stock}</td>
-                        <td>{product.description}</td>
-                    </tr>;
-    })}
-            </tbody>
-        </table>
+        <div className="container mx-auto p-6">
+            <h1 className="text-3xl font-bold mb-6 text-center">Admin Product Page</h1>
+            <div className="overflow-x-auto">
+                <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                    <thead className="bg-gray-800 text-white">
+                        <tr>
+                            <th className="py-3 px-6 text-left">Product ID</th>
+                            <th className="py-3 px-6 text-left">Product Name</th>
+                            <th className="py-3 px-6 text-left">Last Price</th>
+                            <th className="py-3 px-6 text-left">Stock</th>
+                            <th className="py-3 px-6 text-left">Description</th>
+                            <th className="py-3 px-6 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {products.map((product) => (
+                            <tr key={product._id} className="border-b hover:bg-gray-100">
+                                <td className="py-3 px-6">{product.productId}</td>
+                                <td className="py-3 px-6">{product.productName}</td>
+                                <td className="py-3 px-6">${product.lastPrice}</td>
+                                <td className="py-3 px-6">{product.stock}</td>
+                                <td className="py-3 px-6">{product.description}</td>
+                                <td className="py-3 px-6 text-center flex justify-center gap-4">
+                                    <button className="text-red-500 hover:text-red-700">
+                                        <FaTrash size={18} />
+                                    </button>
+                                    <button className="text-blue-500 hover:text-blue-700">
+                                        <FaPencilAlt size={18} />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
-        
-
-        
+        </div>
     );
 }
-//key={product._id}   is React key, which is required to uniquely identify elements in a list and helps React efficiently update the UI.
