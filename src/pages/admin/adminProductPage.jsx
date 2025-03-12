@@ -1,34 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaTrash, FaPencilAlt } from "react-icons/fa";
+import { FaTrash, FaPencilAlt, FaPlus } from "react-icons/fa";
 
 export default function AdminProductPage() {
-    const [products, setProducts] = useState([
-        {
-            "_id": "67a20fccde23b48d73532df2",
-            "productId": "B2001",
-            "productName": "Hydrating Face Serum",
-            "altName": ["Moisturizing Serum", "Glow Boost Serum"],
-            "image": "https://example.com/images/face-serum.jpg",
-            "price": 29.99,
-            "lastPrice": 39.99,
-            "stock": 100,
-            "description": "A lightweight, fast-absorbing face serum enriched with hyaluronic acid and vitamin C for deep hydration and a radiant glow.",
-            "__v": 0
-        },
-        {
-            "_id": "67a21047de23b48d73532df8",
-            "productId": "B2002",
-            "productName": "Face Serum",
-            "altName": ["Moisturizing Serum", "Glow Boost Serum"],
-            "image": "https://example.com/images/face-serum.jpg",
-            "price": 29.99,
-            "lastPrice": 39.99,
-            "stock": 100,
-            "description": "A lightweight, fast-absorbing face serum enriched with hyaluronic acid and vitamin C for deep hydration and a radiant glow.",
-            "__v": 0
-        }
-    ]);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         axios.get("http://localhost:4000/api/products")
@@ -42,7 +17,8 @@ export default function AdminProductPage() {
     }, []);
 
     return (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto p-6 relative">
+            <button className="absolute right-0"><FaPlus/></button>
             <h1 className="text-3xl font-bold mb-6 text-center">Admin Product Page</h1>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
