@@ -37,7 +37,7 @@ export default function AdminHomePage() {
           {/* Corrected paths (relative to /admin) */}
           <Route path="dashboard" element={<h1 className="text-3xl font-semibold">Dashboard</h1>} />
           <Route path="products" element={<AdminProductPage/>} />
-
+          <Route path="products/addProduct" element={<h1 className="text-3xl font-semibold">Add Product</h1>} />
           {/* Default Home Page (when no sub-route is selected) */}
           <Route path="*" element={
            <h1>404 not found the admin page</h1>
