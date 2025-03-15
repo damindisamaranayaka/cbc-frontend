@@ -3,6 +3,7 @@ import { BsGraphUp } from "react-icons/bs";
 import { FaBox } from "react-icons/fa";
 import { Routes, Route } from "react-router-dom";
 import AdminProductPage from "./admin/adminProductPage";
+import AddProductForm from "./admin/addProductForm";
 
 
 export default function AdminHomePage() {
@@ -37,7 +38,7 @@ export default function AdminHomePage() {
           {/* Corrected paths (relative to /admin) */}
           <Route path="dashboard" element={<h1 className="text-3xl font-semibold">Dashboard</h1>} />
           <Route path="products" element={<AdminProductPage/>} />
-          <Route path="products/addProduct" element={<h1 className="text-3xl font-semibold">Add Product</h1>} />
+          <Route path="products/addProduct" element={<AddProductForm/>} />
           {/* Default Home Page (when no sub-route is selected) */}
           <Route path="*" element={
            <h1>404 not found the admin page</h1>
