@@ -54,7 +54,7 @@
                 console.log("Product added response:", response.data); // Debugging step ✅
                 toast.success("Product Added Successfully");
             } catch (err) {
-                console.error("Error adding product:", err.response?.data || err.message); // Debugging step ✅
+                toast.error("Failed to add product");
             }
         }
                 
