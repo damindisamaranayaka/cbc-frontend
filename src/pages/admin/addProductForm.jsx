@@ -12,9 +12,10 @@
         </div>
     );
 }  */
-    import { useState } from "react";
+    import { use, useState } from "react";
     import axios from 'axios';
     import { toast } from 'react-hot-toast';
+    import { useNavigate } from 'react-router-dom';
     export default function AddProductForm() {
         const [productId, setProductID] = useState("");
         const [productName, setProductName] = useState("");
@@ -23,7 +24,7 @@
         const [price, setPrice] = useState("");
         const [stock, setStock] = useState("");
         const [description, setDescription] = useState("");
-    
+        const navigate= useNavigate();
         async function handleSubmit() {
             console.log("Submit button clicked"); // Debugging step ✅
             
@@ -52,9 +53,10 @@
                 });
         
                 console.log("Product added response:", response.data); // Debugging step ✅
+                navigate("/admin/products");
                 toast.success("Product Added Successfully");
             } catch (err) {
-                toast.error("Failed to add product");
+                toast.error("Failed to add products");
             }
         }
                 
