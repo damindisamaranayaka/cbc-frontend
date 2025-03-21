@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 export default function AdminProductPage() {
     const [products, setProducts] = useState([]);
 
+    // Fetch products from API when component mounts
     useEffect(() => {
         axios.get("http://localhost:4000/api/products")
             .then((res) => {
@@ -17,10 +18,39 @@ export default function AdminProductPage() {
             });
     }, []);
 
+    // Function to delete a product
+    const handleDelete = (productId) => {
+        if (window.confirm("Are you sure you want to delete this product?")) {
+            const token = localStorage.getItem("token");
+
+            axios.delete(`http://localhost:4000/api/products/${productId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => {
+                console.log("Product deleted:", res.data);
+                setProducts(products.filter(product => product._id !== productId)); // Update UI after deletion
+            })
+            .catch((error) => {
+                console.error("Error deleting product:", error);
+                alert("Failed to delete product. Please try again.");
+            });
+        }
+    };
+
     return (
-        <div className="container mx-auto p-6 ">
-            <Link to ={"/admin/products/addProduct"} className="absolute right-[25px] bottom-[25px] text-[25px] bg-blue-600 text-white hover:bg-blue-900 rounded-lg p-2"><FaPlus/></Link>
+        <div className="container mx-auto p-6">
+            {/* Add Product Button */}
+            <Link 
+                to="/admin/products/addProduct" 
+                className="absolute right-[25px] bottom-[25px] text-[25px] bg-blue-600 text-white hover:bg-blue-900 rounded-lg p-2"
+            >
+                <FaPlus />
+            </Link>
+
             <h1 className="text-3xl font-bold mb-6 text-center">Admin Product Page</h1>
+
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                     <thead className="bg-gray-800 text-white">
@@ -42,12 +72,16 @@ export default function AdminProductPage() {
                                 <td className="py-3 px-6">{product.stock}</td>
                                 <td className="py-3 px-6">{product.description}</td>
                                 <td className="py-3 px-6 text-center flex justify-center gap-4">
-                                    <button className="text-red-500 hover:text-red-700"
-                                    title="Delete" onClick={()=>{
-                                        alert(product.productId)
-                                    }}>
+                                    {/* Delete Button */}
+                                    <button 
+                                        className="text-red-500 hover:text-red-700" 
+                                        title="Delete" 
+                                        onClick={() => handleDelete(product._id)}
+                                    >
                                         <FaTrash size={18} />
                                     </button>
+
+                                    {/* Edit Button */}
                                     <button className="text-blue-500 hover:text-blue-700">
                                         <FaPencilAlt size={18} />
                                     </button>
