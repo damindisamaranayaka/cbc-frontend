@@ -10,7 +10,8 @@ export default function AdminProductPage() {
 
     // Fetch products from API when component mounts
     useEffect(() => {
-        if(!productLoaded){axios.get("http://localhost:4000/api/products")
+        if(!productLoaded){
+            axios.get("http://localhost:4000/api/products")
             .then((res) => {
                 console.log("Fetched Products:", res.data);
                 setProducts(res.data);
@@ -53,8 +54,8 @@ export default function AdminProductPage() {
             </Link>
 
             <h1 className="text-3xl font-bold mb-6 text-center">Admin Product Page</h1>
-
-            <div className="overflow-x-auto">
+            {
+                productLoaded?            <div className="overflow-x-auto">
                 <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
                     <thead className="bg-gray-800 text-white">
                         <tr>
@@ -108,7 +109,13 @@ export default function AdminProductPage() {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </div>:
+            <div className="w-full h-full flex justify-center">
+            <div className="w-[60px] h-[60px] border-[4px] border-gray-200 border-b-[#3b82f6] animate-spin rounded-full"></div>
+        </div>
+            }
+           
+
         </div>
     );
 }
