@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaTrash, FaPencilAlt, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export default function AdminProductPage() {
     const [products, setProducts] = useState([]);
@@ -76,7 +77,22 @@ export default function AdminProductPage() {
                                     <button 
                                         className="text-red-500 hover:text-red-700" 
                                         title="Delete" 
-                                        onClick={() => handleDelete(product._id)}
+                                        onClick={() => {
+                                            alert(product.productId)
+                                            const token=localStorage.getItem("token")
+                                            axios.delete(`http://localhost:4000/api/products/${product.productId}`, {
+                                                headers: {
+                                                    Authorization: `Bearer ${token}`,
+                                                },
+                                            }).then((res)=>{
+                                                console.log("Product deleted:", res.data);
+                                                toast.success("Product Deleted Successfully");
+                                                setProducts(products.filter(product => product._id !== product.productId)); // Update UI after deletion
+                                            }).catch((error) => {
+                                                console.error("Error deleting product:", error);
+                                                alert("Failed to delete product. Please try again.");
+                                            });
+                                        }}
                                     >
                                         <FaTrash size={18} />
                                     </button>
