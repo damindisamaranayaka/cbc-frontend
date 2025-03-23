@@ -6,18 +6,20 @@ import { toast } from "react-hot-toast";
 
 export default function AdminProductPage() {
     const [products, setProducts] = useState([]);
+    const [productLoaded, setProductLoaded] = useState(false);
 
     // Fetch products from API when component mounts
     useEffect(() => {
-        axios.get("http://localhost:4000/api/products")
+        if(!productLoaded){axios.get("http://localhost:4000/api/products")
             .then((res) => {
                 console.log("Fetched Products:", res.data);
                 setProducts(res.data);
+                setProductLoaded(true);
             })
             .catch((error) => {
                 console.error("Error fetching products:", error);
             });
-    }, []);
+    }}, [productLoaded]);
 
     // Function to delete a product
     const handleDelete = (productId) => {
@@ -77,9 +79,8 @@ export default function AdminProductPage() {
                                     <button 
                                         className="text-red-500 hover:text-red-700" 
                                         title="Delete" 
-                                        onClick={() => {
-                                            alert(product.productId)
-                                            const token=localStorage.getItem("token")
+                                        onClick={() => {                                           
+                                           const token=localStorage.getItem("token")
                                             axios.delete(`http://localhost:4000/api/products/${product.productId}`, {
                                                 headers: {
                                                     Authorization: `Bearer ${token}`,
@@ -87,6 +88,7 @@ export default function AdminProductPage() {
                                             }).then((res)=>{
                                                 console.log("Product deleted:", res.data);
                                                 toast.success("Product Deleted Successfully");
+                                                setProductLoaded(false);
                                                 setProducts(products.filter(product => product._id !== product.productId)); // Update UI after deletion
                                             }).catch((error) => {
                                                 console.error("Error deleting product:", error);
