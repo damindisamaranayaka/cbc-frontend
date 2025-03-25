@@ -6,6 +6,7 @@ import HomePage from './pages/homePage.jsx'
 import SignupPage from './pages/signInPage.jsx'
 import AdminHomePage from './pages/adminHomePage.jsx'
 import UserData from './pages/UserData.jsx'
+import FileUploadTest from './pages/text.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
 
@@ -22,6 +23,7 @@ function App() {
   <Route path="/user" element= {<UserData/>}/>
   <Route path= "/signup" element= {<SignupPage/>}/>
   <Route path="/admin/*" element= {<AdminHomePage/>}/>
+  <Route path="/testing" element={<FileUploadTest/>}/>
   <Route path= "/*" element={<HomePage/>}/>    
   </Routes>
   </BrowserRouter>
