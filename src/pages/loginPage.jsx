@@ -46,3 +46,6 @@ export default function LoginPage() {
   );
 }
 //newadmin@example.com
+// sepabase apikey     
+// 
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0ZWphcmRvdXV0c3NiY2d2eW9lIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4NzE0NzMsImV4cCI6MjA1ODQ0NzQ3M30.EpuWMWV7LQq91vyFlDRZYeMYe5lUYkF2OyrPttAgtew
