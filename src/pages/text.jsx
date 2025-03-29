@@ -14,7 +14,7 @@ export default function FileUploadTest(){
         console.log(file)
 
         const fileName = file.name
-        const extension = fileName.split(".")[fileName.split(".").length-1]  //file name ek . wlin split krla anthima element ek gnnwa. 
+        const extension = fileName.split(".")[fileName.split(".").length-1]  //used to extract the file extension from a given filename. 
         if(extension!="jpg" && extension!="jpeg" && extension!="png"){
             alert("Please select a valid image file")
             return

@@ -11,7 +11,7 @@ export default function AdminProductPage() {
     // Fetch products from API when component mounts
     useEffect(() => {
         if(!productLoaded){
-            axios.get("http://localhost:4000/api/products")
+            axios.get("http://localhost:4000/api/products") 
             .then((res) => {
                 console.log("Fetched Products:", res.data);
                 setProducts(res.data);
